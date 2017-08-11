@@ -1,7 +1,18 @@
 import api.Activity
 import api.SegmentEffort
 import api.StravaApi
+import com.natpryce.konfig.*
 
+object keys : PropertyGroup() {
+    val accessToken by stringType
+    val athleteId by longType
+    val summerStart by longType
+    val summerEnd by longType
+    val summerStartIso by stringType
+    val summerEndIso by stringType
+}
+
+val config = ConfigurationProperties.fromResource("config.properties")
 
 fun main(args: Array<String>) {
     val api = StravaApi.createApiService()
@@ -9,11 +20,11 @@ fun main(args: Array<String>) {
     println("Querying Strava...hang tight!")
     // Synchronously query the Strava api
     // Get list of activities
-    val response = api.getActivities(StravaApi.summerEnd, StravaApi.summerStart)
+    val response = api.getActivities(config[keys.summerEnd], config[keys.summerStart])
             .execute()
     // Get efforts up Hawk Hill
-    val response2 = api.getSegmentEfforts(StravaApi.hawkHillSegmentId, StravaApi.athleteId,
-            StravaApi.summerStartString, StravaApi.summerEndString)
+    val response2 = api.getSegmentEfforts(StravaApi.hawkHillSegmentId, config[keys.athleteId],
+            config[keys.summerStartIso], config[keys.summerEndIso])
             .execute()
 
     if (response.isSuccessful && response2.isSuccessful) {
@@ -73,4 +84,6 @@ operator fun Stats.plus(activity: Activity) = Stats(
         numPhotos + activity.photoNum,
         groupRides + if (activity.athleteCount > 1) 1 else 0
 )
+
+
 

@@ -1,0 +1,10 @@
+# Athlete / Auth
+keys.athleteId=11346071
+keys.accessToken=!!!PUT TOKEN HERE!!!
+# Start and end dates of my summer
+# Unix epooch
+keys.summerStart=1497225600
+keys.summerEnd=1504051200
+# ISO date string format
+keys.summerStartIso=2017-06-11T17:00:00-07:00
+keys.summerEndIso=2017-08-29T17:00:00-07:00

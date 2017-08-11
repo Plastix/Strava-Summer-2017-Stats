@@ -24,10 +24,16 @@ repositories {
 }
 
 dependencies {
+    // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // HTTP
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    // For reading .properties
     compile 'com.natpryce:konfig:1.6.1.0'
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
