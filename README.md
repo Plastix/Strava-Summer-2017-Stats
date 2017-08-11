@@ -6,5 +6,5 @@ I interned at [Strava](https://www.strava.com/) during the summer of 2017. Since
 ### Compiling and Running
 1. Create an application on the [Strava developer page](http://labs.strava.com/developers/)
 2. Copy `config.properties.sample` and rename `config.properties`
-3. Add your [access token](https://www.strava.com/settings/ap) to `config.properties`
+3. Add your [access token](https://www.strava.com/settings/api) to `config.properties`
 4. `./gradlew`
