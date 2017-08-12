@@ -1,5 +1,3 @@
-package api
-
 import com.google.gson.annotations.SerializedName
 
 data class Activity(val distance: Double, // meters
@@ -19,4 +17,3 @@ data class Activity(val distance: Double, // meters
 )
 
 class SegmentEffort() // Empty (we just care about the number of segment efforts, not the data)
-
