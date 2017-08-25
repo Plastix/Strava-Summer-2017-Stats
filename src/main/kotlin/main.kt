@@ -46,6 +46,7 @@ data class Stats(val metersBiked: Double = 0.0,
                  val secondsBiked: Long = 0,
                  val metersClimbed: Double = 0.0,
                  val numCommutes: Int = 0,
+                 val numVirtualRides: Int = 0,
                  val kudosReceived: Int = 0,
                  val numPhotos: Int = 0,
                  val groupRides: Int = 0,
@@ -56,6 +57,7 @@ data class Stats(val metersBiked: Double = 0.0,
     ${secondsBiked.secondsToHours().round(1)} hours spent in the saddle.
     ${metersClimbed.metersToFeet().toInt()} feet climbed.
     $numCommutes commutes to/from Strava HQ.
+    $numVirtualRides virtual rides.
     $kudosReceived kudos received.
     $numCommutes photos uploaded.
     $groupRides group rides.
@@ -69,12 +71,13 @@ operator fun Stats.plus(activity: Activity) =
                 numPhotos = numPhotos + activity.photoNum)
                 .run {
                     // Calculate totals specific to bike rides
-                    if (activity.isRide())
+                    if (activity.isRide() || activity.isVirtualRide())
                         this.copy(metersBiked = metersBiked + activity.distance,
                                 numRides = numRides + 1,
                                 secondsBiked = secondsBiked + activity.movingTime,
                                 metersClimbed = metersClimbed + activity.elevationGain,
                                 numCommutes = numCommutes + if (activity.isCommute) 1 else 0,
+                                numVirtualRides = numVirtualRides + if (activity.isVirtualRide()) 1 else 0,
                                 // Don't include commutes as group rides
                                 // (sometimes you get matched with random people)
                                 groupRides = groupRides + if (!activity.isCommute && activity.athleteCount > 1) 1 else 0

@@ -12,3 +12,5 @@ fun Double.metersToMiles() = this * 0.000621371
 fun Long.secondsToHours() = this / 3600.0
 
 fun Activity.isRide() = this.type == "Ride"
+
+fun Activity.isVirtualRide() = this.type == "VirtualRide"
